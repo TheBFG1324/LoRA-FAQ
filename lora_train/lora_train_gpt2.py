@@ -10,7 +10,7 @@ BATCH = 8
 lm = keras_hub.models.GPT2CausalLM.from_preset(PRESET)
 
 # 2) enable LoRA on the backbone (PEFT)
-lm.backbone.enable_lora(rank=8)  # <-- FIX: this replaces the missing inject_lora()
+lm.backbone.enable_lora(rank=8) 
 
 # 3) build a simple tf.data over concatenated prompt+response strings
 def gen():
@@ -26,7 +26,6 @@ ds = (tf.data.Dataset.from_generator(
       .prefetch(tf.data.AUTOTUNE))
 
 # 4) compile & train
-# GPT2CausalLM handles loss internally when given raw text; just set an optimizer.
 lm.compile(optimizer=keras.optimizers.Adam(2e-5))
 lm.fit(ds, epochs=EPOCHS)
 
