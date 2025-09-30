@@ -1,7 +1,8 @@
 import os
+os.environ["KERAS_BACKEND"] = "tensorflow"
+
 import keras
 
-os.environ["KERAS_BACKEND"] = "tensorflow"
 
 _MODEL = None
 
